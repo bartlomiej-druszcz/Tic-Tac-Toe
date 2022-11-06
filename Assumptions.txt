@@ -1,0 +1,35 @@
+1.Założenia:
+a) Możliwość zapisywania stanu gry
+b) Statystyki gracza
+c) Tabela najlepszych wyników
+d) Rozgrywka z komputerem
+e) Rozgrywka z innym użytkownikiem
+f) Wybór X / O
+g) Liczba rozgrywek
+
+
+2.Lista klas
+a) Board
+	- view()
+
+b) GameController
+	- controller() -> (sprawdza czy ktoś wygrał)
+g
+b) Player
+	name
+	figure [X / O (enum)]
+	statistics [W L D]
+
+c) Computer
+	- implementacja algorytmu min max
+
+d) Presystencja (Wynik, Stan planszy, Player)
+
+e) Ranking
+	Win Lose Draw
+Player
+
+
+3.Wzorzec Obserwator
+
+4.JavaServlet
