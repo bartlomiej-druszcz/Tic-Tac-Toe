@@ -1,19 +1,21 @@
 1.Założenia:
-a) Możliwość zapisywania stanu gry
-b) Statystyki gracza
+a) Możliwość założenia konta
+b) Na starcie panel logowania / rejestracji
 c) Tabela najlepszych wyników
-d) Rozgrywka z komputerem
-e) Rozgrywka z innym użytkownikiem
-f) Wybór X / O
-g) Liczba rozgrywek
+d) Statystyki gracza
+e) Baza użytkowników
+f) Rozgrywka z komputerem (3 poziomy trudności)
+g) Rozgrywka z innym użytkownikiem
+h) Wybór X / O
+i) Zmiana hasła użytkownika zalogowanego
 
 
 2.Lista klas
-a) Board
+a) Board (tablica char [][])
 	- view()
 
 b) GameController
-	- controller() -> (sprawdza czy ktoś wygrał)
+	- 
 g
 b) Player
 	name
@@ -30,6 +32,4 @@ e) Ranking
 Player
 
 
-3.Wzorzec Obserwator
-
-4.JavaServlet
+3.Wzorzec DAO (ewentualnie MVC)
