@@ -12,7 +12,7 @@ public class PrintMenu {
 
         System.out.println("===========MENU============");
         System.out.println("1. Register ");
-        System.out.println("2. Sing in ");
+        System.out.println("2. Sign in ");
         System.out.println("3. Play now");
         System.out.println("4. Exit");
         System.out.println("===========================");
