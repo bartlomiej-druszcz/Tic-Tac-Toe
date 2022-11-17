@@ -5,6 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 class WinningStrategyTest {
@@ -249,10 +251,6 @@ class WinningStrategyTest {
                         {' ', ' ', ' '},
                         {'O', ' ', 'X'}}, new Integer[]{0, 2}),
                 Arguments.of(new Character[][]{
-                        {'X', ' ', ' '},
-                        {' ', ' ', ' '},
-                        {' ', ' ', 'X'}}, new Integer[]{0, 2}),
-                Arguments.of(new Character[][]{
                         {'X', ' ', 'O'},
                         {' ', ' ', ' '},
                         {' ', ' ', 'X'}}, new Integer[]{2, 0}),
@@ -264,10 +262,6 @@ class WinningStrategyTest {
                         {'X', ' ', 'O'},
                         {' ', ' ', ' '},
                         {'O', ' ', ' '}}, new Integer[]{2, 2}),
-                Arguments.of(new Character[][]{
-                        {'X', ' ', ' '},
-                        {' ', ' ', ' '},
-                        {' ', ' ', ' '}}, new Integer[]{2, 2}),
                 Arguments.of(new Character[][]{
                         {'X', ' ', 'O'},
                         {' ', ' ', ' '},
@@ -291,24 +285,56 @@ class WinningStrategyTest {
         Assertions.assertEquals(expectedOutput[1], actualOutput[1]);
     }
 
-    public static Stream<Arguments> emptySideMoveData() {
+    public static Stream<Arguments> emptyCornerMoveManyOptionsData() {
         return Stream.of(
                 Arguments.of(new Character[][]{
                         {'X', ' ', ' '},
                         {' ', ' ', ' '},
-                        {'O', ' ', 'X'}}, new Integer[]{0, 1}),
+                        {' ', ' ', 'X'}}, Arrays.asList(new Integer[]{0, 2}, new Integer[]{2, 0})),
+                Arguments.of(new Character[][]{
+                        {' ', ' ', ' '},
+                        {' ', ' ', ' '},
+                        {' ', ' ', ' '}}, Arrays.asList(new Integer[]{0, 2}, new Integer[]{2, 0},
+                        new Integer[]{2, 2}, new Integer[]{0, 0})),
+                Arguments.of(new Character[][]{
+                        {'X', ' ', ' '},
+                        {' ', ' ', ' '},
+                        {' ', ' ', ' '}}, Arrays.asList(new Integer[]{0, 2}, new Integer[]{2, 0}, new Integer[]{2, 2}))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("emptyCornerMoveManyOptionsData")
+    void emptyCornerMoveManyOptionsToChoose(Character[][] arrayInput, List<Integer[]> list) {
+        //given
+
+        //when
+        boolean flag = false;
+        Integer[] randoms = WinningStrategy.emptyCornerMove(arrayInput);
+        for (Integer[] element : list) {
+            if (Arrays.deepEquals(element, randoms)) {
+                flag = true;
+                break;
+            }
+        }
+        //then
+        Assertions.assertTrue(flag);
+    }
+
+    public static Stream<Arguments> emptySideMoveData() {
+        return Stream.of(
+                Arguments.of(new Character[][]{
+                        {'X', ' ', ' '},
+                        {'O', ' ', 'O'},
+                        {'O', 'X', 'X'}}, new Integer[]{0, 1}),
                 Arguments.of(new Character[][]{
                         {'X', 'O', ' '},
-                        {' ', ' ', ' '},
-                        {' ', ' ', 'X'}}, new Integer[]{1, 2}),
+                        {'O', ' ', ' '},
+                        {' ', 'X', 'X'}}, new Integer[]{1, 2}),
                 Arguments.of(new Character[][]{
                         {'X', 'O', 'O'},
                         {' ', ' ', 'X'},
-                        {' ', ' ', 'X'}}, new Integer[]{1, 0}),
-                Arguments.of(new Character[][]{
-                        {' ', 'X', 'O'},
-                        {' ', ' ', 'O'},
-                        {'O', ' ', 'X'}}, new Integer[]{1, 0}),
+                        {' ', 'O', 'X'}}, new Integer[]{1, 0}),
                 Arguments.of(new Character[][]{
                         {' ', 'X', 'O'},
                         {'X', ' ', 'O'},
@@ -326,6 +352,50 @@ class WinningStrategyTest {
         //then
         Assertions.assertEquals(expectedOutput[0], actualOutput[0]);
         Assertions.assertEquals(expectedOutput[1], actualOutput[1]);
+    }
+
+    public static Stream<Arguments> emptySideMoveManyOptionsData() {
+        return Stream.of(
+                Arguments.of(new Character[][]{
+                        {'X', ' ', ' '},
+                        {' ', ' ', ' '},
+                        {'O', ' ', 'X'}}, Arrays.asList(new Integer[]{0, 1}, new Integer[]{1, 0},
+                        new Integer[]{1, 2}, new Integer[]{2, 1})),
+                Arguments.of(new Character[][]{
+                        {'X', 'O', ' '},
+                        {' ', ' ', ' '},
+                        {' ', ' ', 'X'}}, Arrays.asList(new Integer[]{1, 0}, new Integer[]{1, 2}, new Integer[]{2, 1})),
+                Arguments.of(new Character[][]{
+                        {'X', 'O', 'O'},
+                        {' ', ' ', 'X'},
+                        {' ', ' ', 'X'}}, Arrays.asList(new Integer[]{1, 0}, new Integer[]{2, 1})),
+                Arguments.of(new Character[][]{
+                        {' ', ' ', 'O'},
+                        {'X', ' ', 'O'},
+                        {'O', ' ', 'X'}}, Arrays.asList(new Integer[]{0, 1}, new Integer[]{2, 1})),
+                Arguments.of(new Character[][]{
+                        {' ', 'X', 'O'},
+                        {'X', ' ', ' '},
+                        {'O', ' ', 'X'}}, Arrays.asList(new Integer[]{1, 2}, new Integer[]{2, 1}))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("emptySideMoveManyOptionsData")
+    void emptySideMoveManyOptionsToChoose(Character[][] arrayInput, List<Integer[]> list) {
+        ///given
+
+        //when
+        boolean flag = false;
+        Integer[] randoms = WinningStrategy.emptySideMove(arrayInput);
+        for (Integer[] element : list) {
+            if (Arrays.deepEquals(element, randoms)) {
+                flag = true;
+                break;
+            }
+        }
+        //then
+        Assertions.assertTrue(flag);
     }
 
     public static Stream<Arguments> checkRowsAndColumnsToWinOrBlockData() {

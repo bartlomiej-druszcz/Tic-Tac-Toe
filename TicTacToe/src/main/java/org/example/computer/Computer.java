@@ -50,4 +50,8 @@ public class Computer {
         }
         return emptySideMove(board);
     }
+
+    public Character getSymbol() {
+        return symbol;
+    }
 }

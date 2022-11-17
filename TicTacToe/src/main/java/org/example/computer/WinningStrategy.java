@@ -1,7 +1,6 @@
 package org.example.computer;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The winning strategy is a strategy described by Kevin Crowley and Robert S. Siegler in 1993.
@@ -125,17 +124,21 @@ public final class WinningStrategy {
      * @return coordinates of the spot where insert the symbol or (-1, -1) if there is no spot to make this kind move
      */
     public static Integer[] emptyCornerMove(Character[][] board) {
+        List<Integer[]> list = new ArrayList<>();
         if (board[0][0].equals(' ')) {
-            return new Integer[]{0, 0};
+            list.add(new Integer[]{0, 0});
         }
         if (board[2][2].equals(' ')) {
-            return new Integer[]{2, 2};
+            list.add(new Integer[]{2, 2});
         }
         if (board[0][2].equals(' ')) {
-            return new Integer[]{0, 2};
+            list.add(new Integer[]{0, 2});
         }
         if (board[2][0].equals(' ')) {
-            return new Integer[]{2, 0};
+            list.add(new Integer[]{2, 0});
+        }
+        if (list.size() != 0) {
+            return RandomStrategy.chooseRandom(list);
         }
         return new Integer[]{-1, -1};
     }
@@ -149,16 +152,20 @@ public final class WinningStrategy {
      * @return coordinates of the spot where insert the symbol
      */
     public static Integer[] emptySideMove(Character[][] board) {
+        List<Integer[]> list = new ArrayList<>();
         if (board[0][1].equals(' ')) {
-            return new Integer[]{0, 1};
+            list.add(new Integer[]{0, 1});
         }
         if (board[1][2].equals(' ')) {
-            return new Integer[]{1, 2};
+            list.add(new Integer[]{1, 2});
         }
         if (board[1][0].equals(' ')) {
-            return new Integer[]{1, 0};
+            list.add(new Integer[]{1, 0});
         }
-        return new Integer[]{2, 1};
+        if (board[2][1].equals(' ')) {
+            list.add(new Integer[]{2, 1});
+        }
+        return RandomStrategy.chooseRandom(list);
     }
 
     /**
