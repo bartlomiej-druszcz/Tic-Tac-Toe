@@ -1,4 +1,5 @@
 package org.example.player;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -6,10 +7,7 @@ public class PrintMenu {
 
     static PlayerDAO playerRegisterDAO = new PlayerDAO();
 
-
-    public static void starMenu() throws IOException, InterruptedException, InputMismatchException{
-
-
+    public static void starMenu() throws IOException, InterruptedException, InputMismatchException {
         System.out.println("===========MENU============");
         System.out.println("1. Register ");
         System.out.println("2. Sign in ");
@@ -39,7 +37,8 @@ public class PrintMenu {
                 System.out.println("Login or password is incorrect");
                 starMenu();
             }
-            case 3 -> { PlayerUnregister playerunregister = new PlayerUnregister();
+            case 3 -> {
+                PlayerUnregister playerunregister = new PlayerUnregister();
                 System.out.println("start gry");
             }
 
@@ -52,7 +51,6 @@ public class PrintMenu {
 
         System.out.println();
     }
-
 
     public static void playerMenu() throws IOException, InterruptedException, InputMismatchException {
         System.out.println("=======PLAYER MENU============");

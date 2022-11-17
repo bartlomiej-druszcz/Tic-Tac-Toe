@@ -44,6 +44,3 @@ public class Statistic {
                 ", Tied= " + numberOfRoundsTied;
     }
 }
-
-
-

@@ -15,7 +15,6 @@ public class PlayerDAO implements DAOInterface {
     private HashMap<String, Statistic> listPlayerStatistic = new HashMap<>();
     private HashMap<String, String> listPlayerData = new HashMap<>();
 
-
     @Override
     public void create() throws IOException {
         PlayerRegister playerRegister = new PlayerRegister();
@@ -55,7 +54,6 @@ public class PlayerDAO implements DAOInterface {
         String password = scanner.nextLine();
         return password;
     }
-
 
 
     @Override
