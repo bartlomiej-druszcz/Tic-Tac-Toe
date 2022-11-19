@@ -1,15 +1,16 @@
 package org.example.player;
 
 public class Statistic {
-
     private Integer numberOfRoundsWon;
     private Integer numberOfRoundsLost;
     private Integer numberOfRoundsTied;
+    private Integer numberOfPoints;
 
     public Statistic() {
         this.numberOfRoundsWon = 0;
         this.numberOfRoundsLost = 0;
         this.numberOfRoundsTied = 0;
+        this.numberOfPoints = 0;
     }
 
     public Integer getNumberOfRoundsWon() {
@@ -24,23 +25,27 @@ public class Statistic {
         return numberOfRoundsTied;
     }
 
-    public void setNumberOfRoundsWon(Integer numberOfRoundsWon) {
-        this.numberOfRoundsWon = numberOfRoundsWon;
+    public void incrementNumberOfRoundsWon() {
+        this.numberOfRoundsWon++;
     }
 
-    public void setNumberOfRoundsLost(Integer numberOfRoundsLost) {
-        this.numberOfRoundsLost = numberOfRoundsLost;
+    public void incrementNumberOfRoundsLost() {
+        this.numberOfRoundsLost++;
     }
 
-    public void setNumberOfRoundsTied(Integer numberOfRoundsTied) {
-        this.numberOfRoundsTied = numberOfRoundsTied;
+    public void incrementNumberOfRoundsTied() {
+        this.numberOfRoundsTied++;
     }
 
-    @Override
-    public String toString() {
-        return " Player Statistic: " +
-                "Won= " + numberOfRoundsWon +
-                ", Lost= " + numberOfRoundsLost +
-                ", Tied= " + numberOfRoundsTied;
+    public Integer getNumberOfPoints() {
+        return numberOfPoints;
+    }
+
+    public void setNumberOfPoints(Integer level, Boolean win) {
+        if (win) {
+            this.numberOfPoints += level * 3;
+        } else {
+            this.numberOfPoints += level;
+        }
     }
 }

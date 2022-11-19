@@ -11,93 +11,74 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class PlayerDAO implements DAOInterface {
-    private HashMap<String, Statistic> listPlayerStatistic = new HashMap<>();
-    private HashMap<String, String> listPlayerData = new HashMap<>();
+public class PlayerDAO implements DAOInterface<String, PlayerRegister> {
+    private Map<String, PlayerRegister> listPlayerRegister = new HashMap<>();
 
     @Override
-    public void create() throws IOException {
-        PlayerRegister playerRegister = new PlayerRegister();
-        listPlayerStatistic.put(playerRegister.getLogin(), playerRegister.getStatistic());
-        listPlayerData.put(playerRegister.getLogin(), playerRegister.getPassword());
+    public void create() {
+        Scanner scannerString = new Scanner(System.in);
+        System.out.print(" Enter your login  => ");
+        String login = scannerString.nextLine();
+
+        System.out.print(" Enter your password  => ");
+        String password = scannerString.nextLine();
+
+        System.out.print(" Choose your sign X or O  => ");
+        String figure = scannerString.nextLine();
+        while (!figure.equals("X") && !figure.equals("O")) {
+            System.out.print(" Wrong choice, try again X or O  => ");
+            figure = scannerString.nextLine();
+        }
+        listPlayerRegister.put(login, new PlayerRegister(login, password, figure, new Statistic()));
+        update();
+    }
+
+    @Override
+    public Map<String, PlayerRegister> read() {
+        Gson gson = new Gson();
+        PlayerDAO playerDAO;
+        try (Reader reader = new FileReader("player.json")) {
+            playerDAO = gson.fromJson(reader, this.getClass());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return new HashMap<>();
+        }
+        return playerDAO.listPlayerRegister;
+    }
+
+    @Override
+    public void update() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter("player.json")) {
             gson.toJson(this, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
-    public HashMap<String, Statistic> getAll() {
-        return listPlayerStatistic;
+    public void delete(PlayerRegister playerRegister) {
+        listPlayerRegister.remove(playerRegister.getLogin());
+        update();
     }
-
-    @Override
-    public HashMap<String, String> getAllLogin() {
-        return listPlayerData;
-    }
-
 
     public static String getLogin() {
-        System.out.println("Sing in: ");
         System.out.print(" Enter your login  => ");
         Scanner scanner = new Scanner(System.in);
-        String login = scanner.nextLine();
-        return login;
-
+        return scanner.nextLine();
     }
 
     public static String getPassword() {
         Scanner scanner = new Scanner(System.in);
         System.out.print(" Enter your password  => ");
-        String password = scanner.nextLine();
-        return password;
+        return scanner.nextLine();
     }
 
-
-    @Override
-    public void readAllPlayer() {
-        System.out.println("Player [login] -> Statistic ");
-        Gson gson = new Gson();
-        try (Reader reader = new FileReader("player.json")) {
-            PlayerDAO staff = gson.fromJson(reader, this.getClass());
-            for (Map.Entry<String, Statistic> entry : staff.listPlayerStatistic.entrySet()) {
-                System.out.println(entry);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+    public void setListPlayerRegister(Map<String, PlayerRegister> listPlayerRegister) {
+        this.listPlayerRegister = listPlayerRegister;
     }
 
-    @Override
-    public void update() {
-        String login = getLogin();
-        String password = getPassword();
-
-        for (Map.Entry<String, String> entry : listPlayerData.entrySet()) {
-            if (entry.getKey().equals(login) && entry.getValue().equals(password)) {
-                Scanner scanner = new Scanner(System.in);
-                String newPassword = scanner.nextLine();
-                System.out.print("Enter new password =>");
-                listPlayerData.put(login, newPassword);
-                break;
-            }
-        }
+    public Map<String, PlayerRegister> getListPlayerRegister() {
+        return listPlayerRegister;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,6 +4,7 @@ public abstract class Player {
     private String figure;
 
     public Player() {
+
     }
 
     public String getFigure() {
@@ -12,12 +13,5 @@ public abstract class Player {
 
     public void setFigure(String figure) {
         this.figure = figure;
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "figure=" + figure +
-                '}';
     }
 }

@@ -1,17 +1,14 @@
 package org.example.player;
 
-import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
-public interface DAOInterface<T> {
+public interface DAOInterface<T, U> {
 
-    void create() throws IOException;
+     void create();
+
+    Map<T, U> read();
 
     void update();
 
-    HashMap<String, Statistic> getAll();
-
-    HashMap<String, String> getAllLogin();
-
-    void readAllPlayer();
+    void delete(U u);
 }

@@ -34,6 +34,17 @@ public class BoardController {
         return board[input[0]][input[1]].equals(' ');
     }
 
+    public Boolean isEmptyField(Character[][] board) {
+        for (Character[] row : board) {
+            for (Character field : row) {
+                if (field.equals(' ')) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public List<Integer[]> checkWin(Character[][] board) {
         List<Integer[]> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
