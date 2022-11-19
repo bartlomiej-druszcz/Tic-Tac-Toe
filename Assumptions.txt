@@ -1,35 +1,15 @@
 1.Założenia:
 a) Możliwość założenia konta
 b) Na starcie panel logowania / rejestracji
-c) Tabela najlepszych wyników
-d) Statystyki gracza
-e) Baza użytkowników
+c) Możliwa gra bez rejestracji (z komputerem - 3 poziomy trudności)
+d) Tabela najlepszych wyników (widoczna dla użytkownika zalogowanego)
+e) Baza graczy
 f) Rozgrywka z komputerem (3 poziomy trudności)
-g) Rozgrywka z innym użytkownikiem
+g) Rozgrywka z innym użytkownikiem niezalogowanym
 h) Wybór X / O
 i) Zmiana hasła użytkownika zalogowanego
 
 
-2.Lista klas
-a) Board (tablica char [][])
-	- view()
-
-b) GameController
-	- 
-g
-b) Player
-	name
-	figure [X / O (enum)]
-	statistics [W L D]
-
-c) Computer
-	- implementacja algorytmu min max
-
-d) Presystencja (Wynik, Stan planszy, Player)
-
-e) Ranking
-	Win Lose Draw
-Player
-
-
-3.Wzorzec DAO (ewentualnie MVC)
+2.Wzorce projektowe:
+  Wzorzec DAO
+  Wzorzec MVC
